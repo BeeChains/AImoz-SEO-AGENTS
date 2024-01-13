@@ -1,0 +1,69 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "AImoz SEO Agents",
+    "description": "An action for analyzing web content, suggesting keywords, and optimizing meta tags with Moz API integration.",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/analyze-seo": {
+      "post": {
+        "operationId": "analyzeSEO",
+        "summary": "Analyze website and suggest SEO improvements using Moz API",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "description": "URL of the website to analyze"
+                  },
+                  "mozAccessToken": {
+                    "type": "string",
+                    "description": "Access token for the Moz API"
+                  },
+                  "mozMetrics": {
+                    "type": "boolean",
+                    "description": "Enable fetching Moz metrics like Domain Authority and backlink data"
+                  }
+                },
+                "required": ["url", "mozAccessToken", "mozMetrics"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful analysis with SEO report including Moz data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "seoReport": {
+                      "type": "string",
+                      "description": "Detailed SEO analysis report"
+                    },
+                    "mozData": {
+                      "type": "object",
+                      "description": "Moz metrics data"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  }
+}
